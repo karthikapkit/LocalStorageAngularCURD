@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-6 col-sm-12 mt-5 mb-5" >
+
+        <form [formGroup]="registrationForm" >
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Employee Id</label>
+                <div class="col-sm-8">
+                <input [(ngModel)]='user_info.Employeeid' formControlName="Employeeid" type="text" class="form-control" >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Employee Name <span>*</span></label>
+                <div class="col-sm-8">
+                <input [(ngModel)]='user_info.Employeename' formControlName="Employeename" type="text" class="form-control" >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Designation</label>
+                <div class="col-sm-8">
+                    <select class="form-select" [(ngModel)]='user_info.Designation' formControlName="Designation"  >
+                        <option value="Manager">Manager</option>
+                        <option value="Software_Developer">Software_Developer</option>
+                        <option value="Software_Testers">Software_ Testers</option>
+                        <option value="Admin" >Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Salary <span>*</span></label>
+                <div class="col-sm-8">
+                <input [(ngModel)]='user_info.Salary' formControlName="Salary" type="text" class="form-control" >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Email <span>*</span></label>
+                <div class="col-sm-8">
+                <input [(ngModel)]='user_info.Email' formControlName="Email" type="text" class="form-control" >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Mobile <span>*</span></label>
+                <div class="col-sm-8">
+                <input [(ngModel)]='user_info.Mobile' formControlName="Mobile" type="text" class="form-control" >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Gender <span>*</span></label>
+                <div class="col-sm-8">
+                  <input type="radio" class="form-check-input" [(ngModel)]='user_info.Gender' formControlName="Gender" value="Male" > 
+                  <label for="Male"> male</label> &nbsp;&nbsp;
+                  <input type="radio" class="form-check-input" [(ngModel)]='user_info.Gender' formControlName="Gender" value="Female" > 
+                  <label for="Female"> femail</label>&nbsp;&nbsp;
+                  <input type="radio" class="form-check-input" [(ngModel)]='user_info.Gender' formControlName="Gender" value="Others" > 
+                  <label for="Others"> Others</label>&nbsp;&nbsp;
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Qualification</label>
+                <div class="col-sm-8">
+                    <select class="form-select" [(ngModel)]='user_info.Qualification' formControlName="Qualification"  >
+                        <option value="mba">mba</option>
+                        <option value="btech">btech</option>
+                        <option value="degree">degree</option>
+                        <option value="tenth" >tenth</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-5 row" style="text-align: center;">
+                <label class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-8">
+                    <button type="button" [disabled]="registrationForm.invalid" (click)="doAddUser()" class="btn btn-success mb-3">Confirm </button>&nbsp; &nbsp; 
+                    <button type="reset" class="btn btn-primary mb-3"> reset</button>
+                </div>
+            </div>
+
+            <div class="col-auto">
+               
+            </div>
+        </form>
+      </div>
+
+
+
+
+
+
+    <div class="col-sm-12 col-lg-4 mt-2" style="text-align: center;">
+        <span class="span" ><h6>* Fields are mandatory.</h6> </span>
+
+        <div>
+          <span *ngIf="Employeename &&  Employeename.invalid &&  Employeename.touched" >* Please enter Name</span><br>
+          <span *ngIf="Salary && Salary.invalid && Salary.touched" >* Salary must be decimal or number</span><br>
+          <span *ngIf="Email && Email.invalid && Email.touched" >* Please enter valid Email</span><br>
+          <span *ngIf="Mobile && Mobile.invalid && Mobile.touched" >* Mobile start with 9/8/7/6 and max. 10 digits only</span><br>
+
+        </div>
+
+        <!-- <div>
+          {{registrationForm.value | json}}
+        </div> -->
+
+
+    </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+    <footer>
+        <h3> <u>Register Employee</u></h3>
+      </footer>
+
+<div class="container mt-3 scr">
+    <table class="table table-bordered table-responsive">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th>employeeid</th>
+            <th>Employee Name</th>
+            <th>Designation</th>
+            <th>Salary</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Gender</th>
+            <th>Qualification</th>
+            <th>Action | <button (click)="doDelateAll()" class="btn">DelateAll</button> </th>
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of newLstUser; let i = index"  >
+            <th > {{i+1}} </th>
+            <td> {{item.Employeeid}} </td>
+            <td> {{item.Employeename}} </td>
+            <td> {{item.Designation}} </td>
+            <td> {{item.Salary}} </td>
+            <td> {{item.Email}} </td>
+            <td> {{item.Mobile}} </td>
+            <td> {{item.Gender}} </td>
+        
+            <td> {{item.Qualification}} </td>
+      
+            <td> <button (click)="doDelate(i)" class="btn btn-danger">delate</button> | <button  class="btn btn-success">edit</button></td>
+           
+            
+          </tr>
+         
+        </tbody>
+      </table>
+</div>
+
+
+
+
