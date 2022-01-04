@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -14,15 +15,13 @@ export class UsersComponent implements OnInit {
   registrationForm = new FormGroup({
     
     Employeeid : new FormControl(''),
-    Employeename : new FormControl(null,[Validators.required]),
+    Employeename : new FormControl('null',[Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]),
     Designation: new FormControl(''),
     Salary : new FormControl(null,[Validators.required,Validators.pattern(/^[1-9]\d*(\.\d+)?$/)]),
-    Email : new FormControl(null,[Validators.required,Validators.email]),
+    Email : new FormControl(null,[Validators.required,Validators.pattern(/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i)]),
     Mobile : new FormControl(null,[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^[6-9][0-9]{0,9}$/)]),
     Gender : new FormControl('',[Validators.required]),
-    Qualification: new FormControl(''),
-
-    
+    Qualification: new FormControl(''),  
 
   });
 
@@ -70,6 +69,7 @@ get Qualification(){
 
   lstUsers:any = [];
   newLstUser:any = [];
+  newLstUser1:any = [];
 
   user_info:any = {
     Employeeid:'',Employeename:'',Designation:'',Salary:'',Email:'',Mobile:'',Gender:'',Qualification:'',
@@ -82,6 +82,8 @@ get Qualification(){
 
   ngOnInit(){
     this.newLstUser = JSON.parse(localStorage.getItem('$key') || '') ;
+    this.newLstUser1 = JSON.parse(localStorage.getItem('$key') || '') ;
+
   }
 
 
@@ -110,6 +112,20 @@ get Qualification(){
       window.location.reload();
   
   }
+ 
+  doUpdate(index:any){   
+    if(index > -1 ){
+     
+    
+  console.log(index);
+      
+      // console.log(JSON.parse(localStorage.getItem('$key') || ''));
+      // this.registrationForm.controls['Employeeid'].setValue(this.Employeeid);
+    
+  
+    }
+  }
+ 
 
 
 
